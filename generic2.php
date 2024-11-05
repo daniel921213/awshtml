@@ -119,6 +119,7 @@
 						}
 					}
 				?>
+				 <?php if($success_message) echo $success_message; ?>
 
                 <!-- Input form for editing an employee -->
                 <div class="form-container">
