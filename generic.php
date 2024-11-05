@@ -8,29 +8,28 @@
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
         .form-container {
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 20px 0;
             padding: 20px;
-            background-color: #2e2e2e;
-            border-radius: 8px;
-        }
-
-        .form-container table {
-            width: 100%;
-        }
-
-        .form-container input[type="text"], .form-container input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
+            background-color: #f9f9f9;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
         .success-message {
-            color: #4caf50;
+            color: green;
             font-weight: bold;
-            margin-top: 15px;
         }
     </style>
 </head>
@@ -86,24 +85,49 @@
                     <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
                         <table>
                             <tr>
-                                <td><label for="emp_name">Name</label></td>
-                                <td><label for="position">Position</label></td>
-                                <td><label for="department">Department</label></td>
-                                <td><label for="contact">Contact</label></td>
+                                <td><label for="EMP_NAME">Name</label></td>
+                                <td><label for="POSITION">Position</label></td>
+                                <td><label for="DEPARTMENT">Department</label></td>
+                                <td><label for="CONTACT">Contact</label></td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="EMP_NAME" id="emp_name" maxlength="45" required /></td>
-                                <td><input type="text" name="POSITION" id="position" maxlength="45" required /></td>
-                                <td><input type="text" name="DEPARTMENT" id="department" maxlength="45" required /></td>
-                                <td><input type="text" name="CONTACT" id="contact" maxlength="15" required /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"><input type="submit" value="Add Employee" /></td>
+                                <td><input type="text" name="EMP_NAME" id="EMP_NAME" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="POSITION" id="POSITION" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="DEPARTMENT" id="DEPARTMENT" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="CONTACT" id="CONTACT" maxlength="15" size="20" required /></td>
+                                <td><input type="submit" value="Add Employee" /></td>
                             </tr>
                         </table>
                     </form>
                 </div>
 
+                <!-- Display table data -->
+                <table class="data-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Department</th>
+                        <th>Contact</th>
+                    </tr>
+
+                    <?php
+                        $result = mysqli_query($connection, "SELECT * FROM EMPLOYEES");
+
+                        while($query_data = mysqli_fetch_row($result)) {
+                            echo "<tr>";
+                            echo "<td>", $query_data[0], "</td>",
+                                 "<td>", $query_data[1], "</td>",
+                                 "<td>", $query_data[2], "</td>",
+                                 "<td>", $query_data[3], "</td>",
+                                 "<td>", $query_data[4], "</td>";
+                            echo "</tr>";
+                        }
+
+                        mysqli_free_result($result);
+                        mysqli_close($connection);
+                    ?>
+                </table>
             </div>
         </section>
     </div>
@@ -127,3 +151,40 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+<?php
+function AddEmployee($connection, $name, $position, $department, $contact) {
+    $n = mysqli_real_escape_string($connection, $name);
+    $p = mysqli_real_escape_string($connection, $position);
+    $d = mysqli_real_escape_string($connection, $department);
+    $c = mysqli_real_escape_string($connection, $contact);
+
+    $query = "INSERT INTO EMPLOYEES (NAME, POSITION, DEPARTMENT, CONTACT) VALUES ('$n', '$p', '$d', '$c');";
+
+    return mysqli_query($connection, $query);
+}
+
+function VerifyEmployeesTable($connection, $dbName) {
+    if(!TableExists("EMPLOYEES", $connection, $dbName)) {
+        $query = "CREATE TABLE EMPLOYEES (
+            ID int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            NAME VARCHAR(45),
+            POSITION VARCHAR(45),
+            DEPARTMENT VARCHAR(45),
+            CONTACT VARCHAR(15)
+        )";
+
+        if(!mysqli_query($connection, $query)) echo("<p>Error creating table.</p>");
+    }
+}
+
+function TableExists($tableName, $connection, $dbName) {
+    $t = mysqli_real_escape_string($connection, $tableName);
+    $d = mysqli_real_escape_string($connection, $dbName);
+
+    $checktable = mysqli_query($connection,
+        "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
+
+    return mysqli_num_rows($checktable) > 0;
+}
+?>
