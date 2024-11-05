@@ -58,8 +58,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="add_employee.php" class="active">Add Employee</a></li>
-                <li><a href="view_employees.php">View Employees</a></li>
+                <li><a href="add_employee.php">Add Employee</a></li>
+                <li><a href="view_employees.php" class="active">View Employees</a></li>
             </ul>
         </nav>
     </header>
@@ -69,7 +69,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">Add or Edit Employee</h1>
+                <h1 class="major">Edit Employee</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
@@ -98,23 +98,18 @@
                         }
                     }
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $employee_id) {
                         $employee_name = htmlentities($_POST['EMP_NAME']);
                         $employee_position = htmlentities($_POST['POSITION']);
                         $employee_department = htmlentities($_POST['DEPARTMENT']);
                         $employee_contact = htmlentities($_POST['CONTACT']);
-
-                        if ($employee_id) {
-                            // 更新員工資料
-                            UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact);
-                        } else {
-                            // 新增員工資料
-                            AddEmployee($connection, $employee_name, $employee_position, $employee_department, $employee_contact);
-                        }
+                        
+                        // Update employee data
+                        UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact);
                     }
                 ?>
 
-                <!-- Input form for adding or editing an employee -->
+                <!-- Input form for editing an employee -->
                 <div class="form-container">
                     <form action="" method="POST">
                         <table>
@@ -123,13 +118,14 @@
                                 <td><label for="POSITION">Position</label></td>
                                 <td><label for="DEPARTMENT">Department</label></td>
                                 <td><label for="CONTACT">Contact</label></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td><input type="text" name="EMP_NAME" id="EMP_NAME" value="<?php echo $employee_name; ?>" required /></td>
                                 <td><input type="text" name="POSITION" id="POSITION" value="<?php echo $employee_position; ?>" required /></td>
                                 <td><input type="text" name="DEPARTMENT" id="DEPARTMENT" value="<?php echo $employee_department; ?>" required /></td>
                                 <td><input type="text" name="CONTACT" id="CONTACT" value="<?php echo $employee_contact; ?>" required /></td>
-                                <td><input type="submit" value="<?php echo $employee_id ? 'Update Employee' : 'Add Employee'; ?>" /></td>
+                                <td><input type="submit" value="Update Employee" /></td>
                             </tr>
                         </table>
                     </form>
@@ -189,11 +185,6 @@
 </html>
 
 <?php
-function AddEmployee($connection, $name, $position, $department, $contact) {
-    $query = "INSERT INTO EMPLOYEES (NAME, POSITION, DEPARTMENT, CONTACT) VALUES ('$name', '$position', '$department', '$contact');";
-    return mysqli_query($connection, $query);
-}
-
 function UpdateEmployee($connection, $id, $name, $position, $department, $contact) {
     $query = "UPDATE EMPLOYEES SET NAME='$name', POSITION='$position', DEPARTMENT='$department', CONTACT='$contact' WHERE ID=$id;";
     return mysqli_query($connection, $query);
