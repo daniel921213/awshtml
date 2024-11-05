@@ -108,7 +108,7 @@
                         $employee_contact = htmlentities($_POST['CONTACT']);
                         
 						if (UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact)) {
-							$success_message = "員工資料已成功更新！"; // Success message in Chinese
+							$success_message = "<p class='success-message'>員工資料已更新!</p>"; // Success message in Chinese
 							// Clear the input fields
 							$employee_name = "";
 							$employee_position = "";
