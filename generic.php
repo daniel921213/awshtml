@@ -55,11 +55,11 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">新增員工<</a>
+        <a href="index.html" class="title">員工管理</a>
         <nav>
             <ul>
 				<li><a href="index.html">主頁</a></li>
-				<li><a href="generic.php">新增員工</a></li>
+				<li><a href="generic2.php">新增員工</a></li>
                 <li><a href="generic2.php">修改員工</a></li>
 				<li><a href="generic3.php">刪除員工</a></li>
                 <li><a href="generic4.php" >所有員工</a></li>
