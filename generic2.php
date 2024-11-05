@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Employee Management - Edit Employee</title>
+    <title>員工管理 - 新增員工</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -54,12 +54,13 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">Employee Management</a>
+        <a href="index.html" class="title">新增員工</a>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="add_employee.php">Add Employee</a></li>
-                <li><a href="view_employees.php" class="active">View Employees</a></li>
+                <li><a href="index.html">主頁</a></li>
+                <li><a href="generic2.php">新增員工</a></li>
+				<li><a href="generic3.php">修改員工</a></li>
+                <li><a href="view_employees.php" class="active">所有員工</a></li>
             </ul>
         </nav>
     </header>
@@ -69,7 +70,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">Edit Employee</h1>
+                <h1 class="major">新增員工</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
