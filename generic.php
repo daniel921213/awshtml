@@ -92,7 +92,7 @@
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && strlen($employee_name) && strlen($employee_position) && strlen($employee_department) && strlen($employee_contact)) {
                         if (AddEmployee($connection, $employee_name, $employee_position, $employee_department, $employee_contact)) {
-                            $success_message = "<p class='success-message'>Employee added successfully!</p>";
+                            $success_message = "<p class='success-message'>員工已新增成功!</p>";
                         }
                     }
                 ?>
@@ -105,10 +105,10 @@
                     <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
                         <table>
                             <tr>
-                                <td><label for="EMP_NAME">Name</label></td>
-                                <td><label for="POSITION">Position</label></td>
-                                <td><label for="DEPARTMENT">Department</label></td>
-                                <td><label for="CONTACT">Contact</label></td>
+                                <td><label for="EMP_NAME">姓名</label></td>
+                                <td><label for="POSITION">值位</label></td>
+                                <td><label for="DEPARTMENT">部門</label></td>
+                                <td><label for="CONTACT">聯絡方式</label></td>
                             </tr>
                             <tr>
                                 <td><input type="text" name="EMP_NAME" id="EMP_NAME" maxlength="45" size="30" required /></td>
