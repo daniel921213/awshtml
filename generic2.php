@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>員工管理 - 新增員工</title>
+    <title>員工管理 - 修改資料</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -54,7 +54,7 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">新增員工</a>
+        <a href="index.html" class="title">修改資料</a>
         <nav>
             <ul>
                 <li><a href="index.html">主頁</a></li>
@@ -70,7 +70,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">新增員工</h1>
+                <h1 class="major">修改資料</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
