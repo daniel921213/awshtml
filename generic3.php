@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Employee Management - Edit Employee</title>
+    <title>刪除員工</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -54,7 +54,7 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">Employee Management</a>
+        <a href="index.html" class="title">員工管理</a>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -69,7 +69,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">Edit Employee</h1>
+                <h1 class="major">刪除員工</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
@@ -143,7 +143,7 @@
                                  "<td>", $query_data['CONTACT'], "</td>",
                                  "<td>
                                      
-                                     <a href='?delete_id=" . $query_data['ID'] . "' onclick=\"return confirm('Are you sure you want to delete this employee?');\">Delete</a>
+                                     <a href='?delete_id=" . $query_data['ID'] . "' onclick=\"return confirm('確定要刪除該名員工嗎?');\">Delete</a>
                                    </td>";
                             echo "</tr>";
                         }
