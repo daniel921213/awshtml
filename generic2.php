@@ -54,7 +54,8 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">修改資料</a>
+        <a href="index.html" class="title">員工管理
+		</a>
         <nav>
             <ul>
 				<li><a href="index.html">主頁</a></li>
