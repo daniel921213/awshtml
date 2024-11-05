@@ -118,26 +118,7 @@
                 ?>
 
                 <!-- Input form for editing an employee -->
-                <div class="form-container">
-                    <form action="" method="POST">
-                        <table>
-                            <tr>
-                                <td><label for="EMP_NAME">Name</label></td>
-                                <td><label for="POSITION">Position</label></td>
-                                <td><label for="DEPARTMENT">Department</label></td>
-                                <td><label for="CONTACT">Contact</label></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="EMP_NAME" id="EMP_NAME" value="<?php echo $employee_name; ?>" required /></td>
-                                <td><input type="text" name="POSITION" id="POSITION" value="<?php echo $employee_position; ?>" required /></td>
-                                <td><input type="text" name="DEPARTMENT" id="DEPARTMENT" value="<?php echo $employee_department; ?>" required /></td>
-                                <td><input type="text" name="CONTACT" id="CONTACT" value="<?php echo $employee_contact; ?>" required /></td>
-                                <td><input type="submit" value="Update Employee" /></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+                
 
                 <!-- Display table data -->
                 <table class="data-table">
@@ -161,7 +142,7 @@
                                  "<td>", $query_data['DEPARTMENT'], "</td>",
                                  "<td>", $query_data['CONTACT'], "</td>",
                                  "<td>
-                                     <a href='?edit_id=" . $query_data['ID'] . "'>Edit</a> | 
+                                     
                                      <a href='?delete_id=" . $query_data['ID'] . "' onclick=\"return confirm('Are you sure you want to delete this employee?');\">Delete</a>
                                    </td>";
                             echo "</tr>";
