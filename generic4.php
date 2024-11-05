@@ -61,10 +61,10 @@
                 <table class="data-table">
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Department</th>
-                        <th>Contact</th>
+                        <th>姓名</th>
+                        <th>值位</th>
+                        <th>部們</th>
+                        <th>連絡電話</th>
                     </tr>
 
                     <?php
