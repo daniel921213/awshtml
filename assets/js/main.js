@@ -38,6 +38,7 @@
 				// Stop propagation, default.
 					event.stopPropagation();
 					event.preventDefault();
+					alert("OK，已收到");
 
 				// Submit form.
 					$(this).parents('form').submit();
