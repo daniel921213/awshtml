@@ -118,7 +118,7 @@
                         <table>
                             <tr>
 							<td><label for="EMP_NAME">姓名</label></td>
-                                <td><label for="POSITION">值位</label></td>
+                                <td><label for="POSITION">職位</label></td>
                                 <td><label for="DEPARTMENT">部門</label></td>
                                 <td><label for="CONTACT">聯絡方式</label></td>
                                 <td></td>
