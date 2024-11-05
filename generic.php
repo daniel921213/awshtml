@@ -1,60 +1,61 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>員工管理 - 修改資料</title>
+    <title>員工管理 - 新增員工</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <style>
-        .form-container {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #fff;
-        }
-        .form-container input[type="text"] {
-            background-color: #444;
-            color: #fff;
-            border: 1px solid #777;
-            padding: 8px;
-            margin: 5px 0;
-            width: 90%;
-            border-radius: 3px;
-        }
-        .form-container input[type="submit"] {
-            background-color: #5a67d8;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        .form-container input[type="submit"]:hover {
-            background-color: #4c51bf;
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            color: #fff;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid #555;
-            padding: 8px;
-            text-align: left;
-            background-color: #333;
-        }
-        .data-table th {
-            background-color: #444;
-        }
-    </style>
+    .form-container {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #333; /* 更深的背景色 */
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #fff; /* 白色字體顏色 */
+    }
+    .form-container input[type="text"] {
+        background-color: #444; /* 深灰色輸入框背景 */
+        color: #fff; /* 白色字體顏色 */
+        border: 1px solid #777; /* 顯眼的灰色邊框 */
+        padding: 8px;
+        margin: 5px 0;
+        width: 90%;
+        border-radius: 3px;
+    }
+    .form-container input[type="submit"] {
+        background-color: #5a67d8; /* 按鈕背景色 */
+        color: #fff; /* 白色字體 */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    .form-container input[type="submit"]:hover {
+        background-color: #4c51bf; /* 深一點的按鈕背景色 */
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        color: #fff; /* 表格文字顏色 */
+    }
+    .data-table th, .data-table td {
+        border: 1px solid #555;
+        padding: 8px;
+        text-align: left;
+        background-color: #333; /* 表格背景色 */
+    }
+    .data-table th {
+        background-color: #444; /* 表頭背景色 */
+    }
+</style>
 </head>
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">修改資料</a>
+        <a href="index.html" class="title">新增員工<</a>
         <nav>
             <ul>
 				<li><a href="index.html">主頁</a></li>
@@ -71,7 +72,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">修改資料</h1>
+                <h1 class="major">新增員工</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
@@ -83,51 +84,39 @@
 
                     VerifyEmployeesTable($connection, DB_DATABASE);
 
-                    $employee_id = isset($_GET['edit_id']) ? intval($_GET['edit_id']) : null;
-                    $employee_name = "";
-                    $employee_position = "";
-                    $employee_department = "";
-                    $employee_contact = "";
+                    $employee_name = htmlentities($_POST['EMP_NAME']);
+                    $employee_position = htmlentities($_POST['POSITION']);
+                    $employee_department = htmlentities($_POST['DEPARTMENT']);
+                    $employee_contact = htmlentities($_POST['CONTACT']);
 
-                    if ($employee_id) {
-                        $query = "SELECT * FROM EMPLOYEES WHERE ID = $employee_id";
-                        $result = mysqli_query($connection, $query);
-                        if ($row = mysqli_fetch_assoc($result)) {
-                            $employee_name = $row['NAME'];
-                            $employee_position = $row['POSITION'];
-                            $employee_department = $row['DEPARTMENT'];
-                            $employee_contact = $row['CONTACT'];
+                    $success_message = "";
+
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && strlen($employee_name) && strlen($employee_position) && strlen($employee_department) && strlen($employee_contact)) {
+                        if (AddEmployee($connection, $employee_name, $employee_position, $employee_department, $employee_contact)) {
+                            $success_message = "<p class='success-message'>員工已新增成功!</p>";
                         }
-                    }
-
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $employee_id) {
-                        $employee_name = htmlentities($_POST['EMP_NAME']);
-                        $employee_position = htmlentities($_POST['POSITION']);
-                        $employee_department = htmlentities($_POST['DEPARTMENT']);
-                        $employee_contact = htmlentities($_POST['CONTACT']);
-                        
-                        // Update employee data
-                        UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact);
                     }
                 ?>
 
-                <!-- Input form for editing an employee -->
+                <!-- Success message -->
+                <?php if($success_message) echo $success_message; ?>
+
+                <!-- Input form for adding a new employee -->
                 <div class="form-container">
-                    <form action="" method="POST">
+                    <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
                         <table>
                             <tr>
-							<td><label for="EMP_NAME">姓名</label></td>
+                                <td><label for="EMP_NAME">姓名</label></td>
                                 <td><label for="POSITION">值位</label></td>
                                 <td><label for="DEPARTMENT">部門</label></td>
                                 <td><label for="CONTACT">聯絡方式</label></td>
-                                <td></td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="EMP_NAME" id="EMP_NAME" value="<?php echo $employee_name; ?>" required /></td>
-                                <td><input type="text" name="POSITION" id="POSITION" value="<?php echo $employee_position; ?>" required /></td>
-                                <td><input type="text" name="DEPARTMENT" id="DEPARTMENT" value="<?php echo $employee_department; ?>" required /></td>
-                                <td><input type="text" name="CONTACT" id="CONTACT" value="<?php echo $employee_contact; ?>" required /></td>
-                                <td><input type="submit" value="Update Employee" /></td>
+                                <td><input type="text" name="EMP_NAME" id="EMP_NAME" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="POSITION" id="POSITION" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="DEPARTMENT" id="DEPARTMENT" maxlength="45" size="30" required /></td>
+                                <td><input type="text" name="CONTACT" id="CONTACT" maxlength="15" size="20" required /></td>
+                                <td><input type="submit" value="Add Employee" /></td>
                             </tr>
                         </table>
                     </form>
@@ -141,20 +130,18 @@
                         <th>Position</th>
                         <th>Department</th>
                         <th>Contact</th>
-                        <th>Action</th>
                     </tr>
 
                     <?php
                         $result = mysqli_query($connection, "SELECT * FROM EMPLOYEES");
 
-                        while($query_data = mysqli_fetch_assoc($result)) {
+                        while($query_data = mysqli_fetch_row($result)) {
                             echo "<tr>";
-                            echo "<td>", $query_data['ID'], "</td>",
-                                 "<td>", $query_data['NAME'], "</td>",
-                                 "<td>", $query_data['POSITION'], "</td>",
-                                 "<td>", $query_data['DEPARTMENT'], "</td>",
-                                 "<td>", $query_data['CONTACT'], "</td>",
-                                 "<td><a href='?edit_id=" . $query_data['ID'] . "'>Edit</a></td>";
+                            echo "<td>", $query_data[0], "</td>",
+                                 "<td>", $query_data[1], "</td>",
+                                 "<td>", $query_data[2], "</td>",
+                                 "<td>", $query_data[3], "</td>",
+                                 "<td>", $query_data[4], "</td>";
                             echo "</tr>";
                         }
 
@@ -187,14 +174,19 @@
 </html>
 
 <?php
-function UpdateEmployee($connection, $id, $name, $position, $department, $contact) {
-    $query = "UPDATE EMPLOYEES SET NAME='$name', POSITION='$position', DEPARTMENT='$department', CONTACT='$contact' WHERE ID=$id;";
+function AddEmployee($connection, $name, $position, $department, $contact) {
+    $n = mysqli_real_escape_string($connection, $name);
+    $p = mysqli_real_escape_string($connection, $position);
+    $d = mysqli_real_escape_string($connection, $department);
+    $c = mysqli_real_escape_string($connection, $contact);
+
+    $query = "INSERT INTO EMPLOYEES (NAME, POSITION, DEPARTMENT, CONTACT) VALUES ('$n', '$p', '$d', '$c');";
+
     return mysqli_query($connection, $query);
 }
 
 function VerifyEmployeesTable($connection, $dbName) {
-    $checktable = mysqli_query($connection, "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = 'EMPLOYEES' AND TABLE_SCHEMA = '$dbName'");
-    if (mysqli_num_rows($checktable) == 0) {
+    if(!TableExists("EMPLOYEES", $connection, $dbName)) {
         $query = "CREATE TABLE EMPLOYEES (
             ID int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             NAME VARCHAR(45),
@@ -202,7 +194,18 @@ function VerifyEmployeesTable($connection, $dbName) {
             DEPARTMENT VARCHAR(45),
             CONTACT VARCHAR(15)
         )";
-        mysqli_query($connection, $query);
+
+        if(!mysqli_query($connection, $query)) echo("<p>Error creating table.</p>");
     }
+}
+
+function TableExists($tableName, $connection, $dbName) {
+    $t = mysqli_real_escape_string($connection, $tableName);
+    $d = mysqli_real_escape_string($connection, $dbName);
+
+    $checktable = mysqli_query($connection,
+        "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
+
+    return mysqli_num_rows($checktable) > 0;
 }
 ?>
