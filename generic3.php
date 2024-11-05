@@ -58,8 +58,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="add_employee.php">Add Employee</a></li>
-                <li><a href="view_employees.php" class="active">View Employees</a></li>
+                <li><a href="generic.php">新增員工</a></li>
+                <li><a href="view_employees.php" class="active">所有員工</a></li>
             </ul>
         </nav>
     </header>
