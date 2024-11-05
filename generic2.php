@@ -107,10 +107,18 @@
                         $employee_department = htmlentities($_POST['DEPARTMENT']);
                         $employee_contact = htmlentities($_POST['CONTACT']);
                         
-                        // Update employee data
-                        UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact);
-                    }
-                ?>
+						if (UpdateEmployee($connection, $employee_id, $employee_name, $employee_position, $employee_department, $employee_contact)) {
+							$success_message = "員工資料已成功更新！"; // Success message in Chinese
+							// Clear the input fields
+							$employee_name = "";
+							$employee_position = "";
+							$employee_department = "";
+							$employee_contact = "";
+						} else {
+							$success_message = "更新失敗，請重試。"; // Error message
+						}
+					}
+				?>
 
                 <!-- Input form for editing an employee -->
                 <div class="form-container">
