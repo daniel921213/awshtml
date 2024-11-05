@@ -26,7 +26,7 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="title">員工清單
+        <a href="index.html" class="title">員工管理
 		</a>
         <nav>
             <ul>
