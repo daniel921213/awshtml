@@ -6,32 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <style>
-        .form-container {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        .data-table th {
-            background-color: #f2f2f2;
-        }
-        .success-message {
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+   <style>
+    .form-container {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #333; /* 更深的背景色 */
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #fff; /* 白色字體顏色 */
+    }
+    .form-container input[type="text"] {
+        background-color: #444; /* 深灰色輸入框背景 */
+        color: #fff; /* 白色字體顏色 */
+        border: 1px solid #777; /* 顯眼的灰色邊框 */
+        padding: 8px;
+        margin: 5px 0;
+        width: 90%;
+        border-radius: 3px;
+    }
+    .form-container input[type="submit"] {
+        background-color: #5a67d8; /* 按鈕背景色 */
+        color: #fff; /* 白色字體 */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    .form-container input[type="submit"]:hover {
+        background-color: #4c51bf; /* 深一點的按鈕背景色 */
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        color: #fff; /* 表格文字顏色 */
+    }
+    .data-table th, .data-table td {
+        border: 1px solid #555;
+        padding: 8px;
+        text-align: left;
+        background-color: #333; /* 表格背景色 */
+    }
+    .data-table th {
+        background-color: #444; /* 表頭背景色 */
+    }
+</style>
 </head>
 <body class="is-preload">
     <!-- Header -->
