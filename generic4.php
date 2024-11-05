@@ -44,7 +44,7 @@
         <!-- Main -->
         <section id="main" class="wrapper">
             <div class="inner">
-                <h1 class="major">List of Employees</h1>
+                <h1 class="major">員工列表</h1>
                 
                 <?php
                     include "../inc/dbinfo.inc"; 
@@ -63,7 +63,7 @@
                     <tr>
                         <th>ID</th>
                         <th>姓名</th>
-                        <th>值位</th>
+                        <th>職位</th>
                         <th>部們</th>
                         <th>連絡電話</th>
                     </tr>
